@@ -4,6 +4,17 @@ import { useState } from 'react'; // Added missing import
 import sentimentScatterData from './sentiment_scatter.json'; // Adjust path as needed
 import sentimentTrendData from './sentiment_trend.json'; // Adjust path as needed
 
+// import { useState } from "react";
+// Import the JSON dataset directly
+import redditDataset from "./data/small_output_2.json"; // Adjust the path as needed
+
+
+
+const ldaData = { "data": [{ "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [24, 33, 30, 25], "name": "Topic 1", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [19, 24, 34, 23], "name": "Topic 2", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [18, 32, 33, 34], "name": "Topic 3", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [40, 40, 67, 52], "name": "Topic 4", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [89, 99, 154, 104], "name": "Topic 5", "type": "scatter", "mode": "lines+markers" }], "layout": { "title": "Topic Distribution Over Time in Anarchism Subreddit", "xaxis": { "title": "Date" }, "yaxis": { "title": "Number of Posts" }, "legend": { "title": { "text": "Topics" } }, "hovermode": "x unified" }, "topics": { "Topic 1": ["friday", "open", "free", "discussion", "weekly", "thread", "talk", "sabotage", "organize", "police"], "Topic 2": ["radical", "gender", "news", "bipoc", "people", "podcast", "non", "tuesday", "listening", "events"], "Topic 3": ["aid", "mutual", "action", "luigi", "day", "strike", "let", "mangione", "libertarian", "list"], "Topic 4": ["people", "think", "power", "feel", "years", "important", "revolution", "change", "really", "ice"], "Topic 5": ["anarchist", "new", "ive", "people", "anarchists", "help", "world", "want", "women", "community"] } }
+const ldaData2 = { "data": [{ "x": ["2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02"], "y": [5, 20, 11, 10, 9, 9, 27, 25], "name": "Topic 1", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02"], "y": [2, 4, 7, 7, 8, 12, 36, 17], "name": "Topic 2", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02"], "y": [3, 4, 5, 4, 14, 12, 14, 6], "name": "Topic 3", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02"], "y": [16, 36, 56, 47, 143, 46, 148, 149], "name": "Topic 4", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02"], "y": [1, 3, 5, 5, 12, 13, 20, 13], "name": "Topic 5", "type": "scatter", "mode": "lines+markers" }], "layout": { "title": "Topic Distribution Over Time in Anarchism Subreddit", "xaxis": { "title": "Date" }, "yaxis": { "title": "Number of Posts" }, "legend": { "title": { "text": "Topics" } }, "hovermode": "x unified" }, "topics": { "Topic 1": ["trump", "trumps", "harris", "kamala", "million", "donald", "fbi", "obama", "administration", "biden"], "Topic 2": ["trump", "biden", "president", "calls", "law", "court", "new", "aid", "supreme", "democrats"], "Topic 3": ["senate", "gaetz", "house", "gop", "vote", "trump", "ethics", "probably", "democrats", "list"], "Topic 4": ["people", "trump", "think", "going", "election", "want", "right", "time", "vote", "need"], "Topic 5": ["trump", "greenland", "biden", "harris", "bidens", "says", "security", "student", "plans", "tariffs"] } }
+
+
+
 // Sample time series data for different subreddits
 const conservative_frequency = [{ "created_date": "2025-02-11T00:00:00.000", "num_posts": 74 }, { "created_date": "2025-02-12T00:00:00.000", "num_posts": 199 }, { "created_date": "2025-02-13T00:00:00.000", "num_posts": 190 }, { "created_date": "2025-02-14T00:00:00.000", "num_posts": 147 }, { "created_date": "2025-02-15T00:00:00.000", "num_posts": 105 }, { "created_date": "2025-02-16T00:00:00.000", "num_posts": 107 }, { "created_date": "2025-02-17T00:00:00.000", "num_posts": 126 }, { "created_date": "2025-02-18T00:00:00.000", "num_posts": 32 }];
 const democrats_frequency = [{ "created_date": "2025-01-23T00:00:00.000", "num_posts": 19 }, { "created_date": "2025-01-24T00:00:00.000", "num_posts": 27 }, { "created_date": "2025-01-25T00:00:00.000", "num_posts": 22 }, { "created_date": "2025-01-26T00:00:00.000", "num_posts": 30 }, { "created_date": "2025-01-27T00:00:00.000", "num_posts": 26 }, { "created_date": "2025-01-28T00:00:00.000", "num_posts": 37 }, { "created_date": "2025-01-29T00:00:00.000", "num_posts": 49 }, { "created_date": "2025-01-30T00:00:00.000", "num_posts": 52 }, { "created_date": "2025-01-31T00:00:00.000", "num_posts": 34 }, { "created_date": "2025-02-01T00:00:00.000", "num_posts": 47 }, { "created_date": "2025-02-02T00:00:00.000", "num_posts": 41 }, { "created_date": "2025-02-03T00:00:00.000", "num_posts": 41 }, { "created_date": "2025-02-04T00:00:00.000", "num_posts": 43 }, { "created_date": "2025-02-05T00:00:00.000", "num_posts": 39 }, { "created_date": "2025-02-06T00:00:00.000", "num_posts": 40 }, { "created_date": "2025-02-07T00:00:00.000", "num_posts": 32 }, { "created_date": "2025-02-08T00:00:00.000", "num_posts": 38 }, { "created_date": "2025-02-09T00:00:00.000", "num_posts": 32 }, { "created_date": "2025-02-10T00:00:00.000", "num_posts": 36 }, { "created_date": "2025-02-11T00:00:00.000", "num_posts": 30 }, { "created_date": "2025-02-12T00:00:00.000", "num_posts": 34 }, { "created_date": "2025-02-13T00:00:00.000", "num_posts": 32 }, { "created_date": "2025-02-14T00:00:00.000", "num_posts": 40 }, { "created_date": "2025-02-15T00:00:00.000", "num_posts": 34 }, { "created_date": "2025-02-16T00:00:00.000", "num_posts": 34 }, { "created_date": "2025-02-17T00:00:00.000", "num_posts": 33 }, { "created_date": "2025-02-18T00:00:00.000", "num_posts": 10 }];
@@ -126,11 +137,101 @@ const layoutSentiment = {
       y1: 0,
       line: { color: 'black', dash: 'dash' }
     }
-  ]
+  ],
+  legend: {
+    orientation: 'h',
+    y: -0.30,
+    x: 0,
+    xanchor: 'left',
+    yanchor: 'bottom'
+  },
+  autosize: true,
+  margin: { l: 50, r: 50, b: 100, t: 50 }
+};
+
+const datasetOptions = {
+  "Dataset 1": ldaData,
+  "Dataset 2": ldaData2,
 };
 
 
+// const API_KEY = 'AIzaSyDamRK2LXnodUC2FiL6y9P_qYMha4mFAV8';
+const API_KEY2 = import.meta.env.VITE_API_KEY;
+console.log(API_KEY2);
+
 function App() {
+
+
+
+
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  // Dataset is now directly imported as JSON, no need for parsing or state management
+  const dataset = redditDataset;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!question.trim()) {
+      setError("Please enter a question.");
+      return;
+    }
+
+    setLoading(true);
+    setAnswer("");
+    setError("");
+
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY2}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: `You are a chatbot answering questions about a Reddit dataset. Here is the dataset in JSON:
+                    ${JSON.stringify(dataset, null, 2)}
+                    The user asks: "${question}"
+                    Provide a concise answer in a small paragraph.`,
+                  },
+                ],
+              },
+            ],
+          }),
+        }
+      );
+
+      const data = await response.json();
+      const answerText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini.";
+      setAnswer(answerText);
+    } catch (error) {
+      setError("Error: Failed to connect to Gemini API.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const [selectedDataset, setSelectedDataset] = useState("Dataset 1");
+  const currentData = datasetOptions[selectedDataset];
+
+
   const [selectedSubreddit, setSelectedSubreddit] = useState(subreddits[0]);
 
   const selectedTimeSeriesData = subredditDataMap[selectedSubreddit];
@@ -189,11 +290,65 @@ function App() {
         </div>
 
         <div className="plot-container">
-          <PlotComponent data={[scatterTrace, trendTrace]} layout={layout} />
+          <PlotComponent data={[scatterTrace, trendTrace]} layout={layoutSentiment} />
         </div>
+
+        <div className="dropdown-container">
+          <label htmlFor="dataset-select">Select Dataset: </label>
+          <select
+            id="dataset-select"
+            value={selectedDataset}
+            onChange={(e) => setSelectedDataset(e.target.value)}
+          >
+            {Object.keys(datasetOptions).map((key) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </select>
+        </div>
+
+
+        <div className="plot-container">
+          {/* Plot Component */}
+          <PlotComponent data={currentData.data} layout={currentData.layout} />
+
+          {/* Topic Keywords */}
+        </div>
+        <div>
+          <h3>Topic Keywords</h3>
+          {Object.entries(currentData.topics).map(([topic, words]) => (
+            <p key={topic}>
+              <strong>{topic}:</strong> {words.join(", ")}
+            </p>
+          ))}
+        </div>
+
 
         <div>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam sint id dolorum?
+        </div>
+
+        <div className="chatbot-container">
+          <h1>Reddit Dataset Chatbot</h1>
+          <p>Ask a question about the Reddit dataset.</p>
+
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Enter your question"
+              disabled={loading}
+              className="question-input"
+            />
+            <button type="submit" disabled={loading} className="ask-button">
+              {loading ? "Asking..." : "Ask"}
+            </button>
+          </form>
+
+          {error && <div className="error"><p>{error}</p></div>}
+          {answer && !error && <div className="answer"><h3>Answer:</h3><p>{answer}</p></div>}
         </div>
       </div>
     </div>
