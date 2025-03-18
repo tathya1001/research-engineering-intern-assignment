@@ -161,9 +161,6 @@ console.log(API_KEY2);
 
 function App() {
 
-
-
-
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
