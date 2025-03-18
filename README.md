@@ -23,13 +23,12 @@ npm start
 ```
 ## Screenshots
 
-!(Image 1)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_1.png?raw=true]
-!(Image 2)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_2.png?raw=true]
-!(Image 3)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_3.png?raw=true]
-!(Image 4)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_4.png?raw=true]
-!(Image 5)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_5.png?raw=true]
-!(Image 6)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_6.png?raw=true]
-
+![Image 1](https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_1.png?raw=true)  
+![Image 2](https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_2.png?raw=true)  
+![Image 3](https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_3.png?raw=true)  
+![Image 4](https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_4.png?raw=true)  
+![Image 5](https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_5.png?raw=true)  
+![Image 6](https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_6.png?raw=true)  
 
 ## Code Structure
 
