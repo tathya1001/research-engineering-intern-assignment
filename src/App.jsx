@@ -70,7 +70,7 @@ const subredditPieData = [
 
 const layout = {
   font: {
-    family: "Work Sans, sans-serif",
+    family: "Libre Franklin, sans-serif",
     size: 14,
     color: "#333333"
   },
@@ -140,7 +140,12 @@ const layoutSentiment = {
     yanchor: 'bottom'
   },
   autosize: true,
-  margin: { l: 50, r: 50, b: 100, t: 50 }
+  margin: { l: 50, r: 50, b: 100, t: 50 },
+  font: {
+    family: "Libre Franklin, sans-serif",
+    size: 14,
+    color: "#333333"
+  },
 };
 
 const datasetOptions = {
