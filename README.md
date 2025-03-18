@@ -1,10 +1,10 @@
 # Reddit Data Analysis Dashboard
 
 ## Hosted Link
-[Click here to view the live project](#)
+[Click here to view the live project](https://redditanalysis.vercel.app/)
 
 ## Video Recording
-[Watch the demo video](#)
+[Watch the demo video](https://drive.google.com/file/d/1Bbjpk_lXaonu0oOUnszneN2B1ULP4B-U/view?usp=sharing)
 
 
 
@@ -23,12 +23,18 @@ npm start
 ```
 ## Screenshots
 
-
+!(Image 1)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_1.png?raw=true]
+!(Image 2)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_2.png?raw=true]
+!(Image 3)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_3.png?raw=true]
+!(Image 4)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_4.png?raw=true]
+!(Image 5)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_5.png?raw=true]
+!(Image 6)[https://github.com/tathya1001/research-engineering-intern-assignment/blob/main/image_6.png?raw=true]
 
 
 ## Code Structure
 
-simppl-react/
+```
+react-app/
 │── node_modules/  
 │── src/
 │   │── assets/
@@ -47,7 +53,7 @@ simppl-react/
 │── package.json
 │── README.md
 │── vite.config.js
-
+```
 
 
 ## Thought Process
