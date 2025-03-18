@@ -2,8 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Work Sans', sans-serif;
-  /* font-weight: 600; */
+  font-family: 'Libre Franklin', sans-serif;
 }
 
 .grandparent-container {
@@ -11,7 +10,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* height: 100%; */
   width: 100vw;
 }
 
@@ -20,18 +18,69 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
   width: 40%;
+  max-width: 1200px;
+  /* Limit max width for large screens */
+  padding: 0 15px;
+  /* Add padding for smaller screens */
+}
+
+h1 {
+  /* text-align: left; */
+  /* align-self: flex-start; */
+  margin-top: 1.25rem;
+}
+
+h2 {
+  text-align: left;
+  align-self: flex-start;
+  margin-top: 1.25rem;
+  font-size: 1.5rem;
+}
+
+h4 {
+  text-align: left;
+  align-self: flex-start;
+  margin-top: 1.25rem;
+  font-size: 1.2rem;
+}
+
+.paragraph {
+  margin-top: 0.5rem;
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
+.topic-keywords {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
+.topic-keywords-list {
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.plot-caption {
+  font-family: 'Georgia';
+  font-style: italic;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  color: #afafaf;
+  font-size: 0.9rem;
 }
 
 .plot-container {
-  width: 80%;
+  width: 100%;
   height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  /* Add spacing between plots */
+  margin-top: 1.75rem;
+  max-width: 100%;
+  /* Ensure it doesn’t exceed parent */
 }
 
 /* Dropdown Styling */
@@ -39,32 +88,32 @@
   margin: 20px 0;
   text-align: center;
   width: 100%;
-  max-width: 300px;
+  gap: 0.5rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  max-width: 400px;
   /* Limit width for better readability */
 }
 
 .dropdown-container label {
-  font-family: "Rubik", sans-serif;
-  font-size: 16px;
+  font-family: inherit;
+  font-size: 1rem;
   color: #333;
-  margin-right: 10px;
-  vertical-align: middle;
 }
 
 .dropdown-container select {
-  padding: 10px 15px;
-  font-family: "Rubik", sans-serif;
-  font-size: 16px;
+  padding: 0.5rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
   color: #333;
   background-color: #fff;
-  border: 2px solid #007bff;
-  border-radius: 5px;
+  border: 2px solid #256bb7;
+  border-radius: 0.5rem;
   cursor: pointer;
   width: 100%;
-  max-width: 200px;
+  max-width: 12rem;
   appearance: none;
-  /* Remove default arrow in some browsers */
-
   background-position: right 10px center;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -80,7 +129,7 @@
 }
 
 .dropdown-container select option {
-  font-family: "Rubik", sans-serif;
+  font-family: inherit;
   font-size: 16px;
   padding: 10px;
   background-color: #fff;
@@ -90,4 +139,231 @@
 .dropdown-container select:disabled {
   background-color: #f1f1f1;
   cursor: not-allowed;
+}
+
+.chatbot-container {
+  width: 100%;
+  margin: 1rem auto;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  /* Limit max width */
+}
+
+.chatbot-container p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.question-input {
+  width: 70%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.question-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.question-input:disabled {
+  background-color: #f1f1f1;
+  cursor: not-allowed;
+}
+
+.ask-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.ask-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.ask-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ask-button:enabled:active {
+  transform: scale(0.98);
+}
+
+.error {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ffebee;
+  color: #d32f2f;
+  border-radius: 4px;
+  border-left: 4px solid #d32f2f;
+}
+
+.answer {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #e3f2fd;
+  color: #1e88e5;
+  border-radius: 4px;
+  border-left: 4px solid #1e88e5;
+  text-align: left;
+}
+
+.answer h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.answer p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .parent-container {
+    width: 70%;
+  }
+
+  .plot-container {
+    height: 350px;
+  }
+
+  .dropdown-container {
+    max-width: 350px;
+  }
+
+  .chatbot-container {
+    padding: 15px;
+    max-width: 500px;
+  }
+
+  .question-input {
+    width: 65%;
+  }
+}
+
+@media (max-width: 768px) {
+  .parent-container {
+    width: 85%;
+  }
+
+  .plot-container {
+    height: 300px;
+  }
+
+  .dropdown-container {
+    flex-direction: column;
+    max-width: 100%;
+    gap: 0.75rem;
+  }
+
+  .dropdown-container label {
+    margin-bottom: 0.25rem;
+  }
+
+  .dropdown-container select {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .chatbot-container {
+    margin: 1rem;
+    padding: 10px;
+    max-width: 90%;
+  }
+
+  .question-input {
+    width: 60%;
+    margin-bottom: 10px;
+  }
+
+  .ask-button {
+    width: 30%;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+
+  .paragraph,
+  .topic-keywords {
+    font-size: 0.95rem;
+  }
+
+  .topic-keywords-list {
+    font-size: 0.85rem;
+  }
+
+  .plot-caption {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .parent-container {
+    width: 95%;
+  }
+
+  .plot-container {
+    height: 250px;
+  }
+
+  .chatbot-container {
+    margin: 0.5rem;
+    padding: 8px;
+    max-width: 100%;
+  }
+
+  .question-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .ask-button {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  .paragraph,
+  .topic-keywords {
+    font-size: 0.9rem;
+  }
+
+  .topic-keywords-list {
+    font-size: 0.8rem;
+  }
+
+  .plot-caption {
+    font-size: 0.8rem;
+  }
 }

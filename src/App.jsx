@@ -1,13 +1,9 @@
 import './App.css';
 import PlotComponent from './components/PlotComponent';
-import { useState } from 'react'; // Added missing import
-import sentimentScatterData from './sentiment_scatter.json'; // Adjust path as needed
-import sentimentTrendData from './sentiment_trend.json'; // Adjust path as needed
-
-// import { useState } from "react";
-// Import the JSON dataset directly
-import redditDataset from "./data/small_output_2.json"; // Adjust the path as needed
-
+import { useState } from 'react';
+import sentimentScatterData from './data/sentiment_scatter.json';
+import sentimentTrendData from './data/sentiment_trend.json';
+import redditDataset from "./data/small_output_2.json";
 
 
 const ldaData = { "data": [{ "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [24, 33, 30, 25], "name": "Topic 1", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [19, 24, 34, 23], "name": "Topic 2", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [18, 32, 33, 34], "name": "Topic 3", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [40, 40, 67, 52], "name": "Topic 4", "type": "scatter", "mode": "lines+markers" }, { "x": ["2024-11", "2024-12", "2025-01", "2025-02"], "y": [89, 99, 154, 104], "name": "Topic 5", "type": "scatter", "mode": "lines+markers" }], "layout": { "title": "Topic Distribution Over Time in Anarchism Subreddit", "xaxis": { "title": "Date" }, "yaxis": { "title": "Number of Posts" }, "legend": { "title": { "text": "Topics" } }, "hovermode": "x unified" }, "topics": { "Topic 1": ["friday", "open", "free", "discussion", "weekly", "thread", "talk", "sabotage", "organize", "police"], "Topic 2": ["radical", "gender", "news", "bipoc", "people", "podcast", "non", "tuesday", "listening", "events"], "Topic 3": ["aid", "mutual", "action", "luigi", "day", "strike", "let", "mangione", "libertarian", "list"], "Topic 4": ["people", "think", "power", "feel", "years", "important", "revolution", "change", "really", "ice"], "Topic 5": ["anarchist", "new", "ive", "people", "anarchists", "help", "world", "want", "women", "community"] } }
@@ -112,7 +108,6 @@ const scatterTrace = {
   hovertemplate: 'Date: %{x}<br>Sentiment Score: %{y}<br>Text: %{text}<extra></extra>'
 };
 
-// Line plot trace for 7-day moving average
 const trendTrace = {
   x: sentimentTrendData.map(d => d.created_date),
   y: sentimentTrendData.map(d => d.moving_avg),
@@ -122,7 +117,6 @@ const trendTrace = {
   line: { color: '#007bff' }
 };
 
-// Layout for the plot
 const layoutSentiment = {
   xaxis: { title: 'Date' },
   yaxis: { title: 'Sentiment Score (-1 to 1)', range: [-1, 1] },
@@ -150,14 +144,13 @@ const layoutSentiment = {
 };
 
 const datasetOptions = {
-  "Dataset 1": ldaData,
-  "Dataset 2": ldaData2,
+  "Anarchism": ldaData,
+  "Liberal": ldaData2,
 };
 
 
-// const API_KEY = 'AIzaSyDamRK2LXnodUC2FiL6y9P_qYMha4mFAV8';
 const API_KEY2 = import.meta.env.VITE_API_KEY;
-console.log(API_KEY2);
+
 
 function App() {
 
@@ -166,7 +159,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Dataset is now directly imported as JSON, no need for parsing or state management
   const dataset = redditDataset;
 
   const handleSubmit = async (e) => {
@@ -214,18 +206,7 @@ function App() {
   };
 
 
-
-
-
-
-
-
-
-
-
-
-
-  const [selectedDataset, setSelectedDataset] = useState("Dataset 1");
+  const [selectedDataset, setSelectedDataset] = useState("Anarchism");
   const currentData = datasetOptions[selectedDataset];
 
 
@@ -237,26 +218,61 @@ function App() {
     ...layout,
     title: `${selectedSubreddit} Subreddit: Daily Post Frequency Over Time`,
     xaxis: { title: "Date", tickangle: 0, showgrid: true },
-    yaxis: { title: "Number of Posts", showgrid: true },
+    yaxis: {
+      title: "Number of Posts",
+      tickmode: "linear",
+      side: "left",
+      showticklabels: true,
+
+    },
     template: "plotly_white"
   };
 
-  // Error handling for debugging
-  if (!selectedTimeSeriesData || !Array.isArray(selectedTimeSeriesData)) {
-    console.error("Invalid time series data for", selectedSubreddit);
-    return <div>Error: Invalid data for {selectedSubreddit}</div>;
-  }
+
+
+  // if (!selectedTimeSeriesData || !Array.isArray(selectedTimeSeriesData)) {
+  //   console.error("Invalid time series data for", selectedSubreddit);
+  //   return <div>Error: Invalid data for {selectedSubreddit}</div>;
+  // }
 
   return (
     <div className="grandparent-container">
       <div className='parent-container'>
-        <h1>Story-Based Data Analysis</h1>
+        <h1>Reddit Data Analysis Dashboard</h1>
+        <p className='paragraph'>by Tathya Patel</p>
+
+        <h2>Introduction</h2>
+        <p className='paragraph'>
+          Welcome to an in-depth exploration of the vibrant and diverse world of Reddit, a platform where communities thrive through shared interests, debates, and discussions. This analysis focuses on prominent subreddits, utilizing a comprehensive dataset of posts collected over recent months. The aim is to uncover patterns in posting frequency, sentiment, and thematic content, offering a snapshot of user engagement and ideological leanings. By employing visualizations and natural language processing techniques, this report seeks to reveal how these online spaces mirror broader social and political currents. The study not only highlights the unique dynamics within each subreddit but also provides a window into how digital communities evolve in response to global events and cultural shifts, making it a compelling study of modern online discourse.
+        </p>
+        <h2>About Domains</h2>
+        <p className='paragraph'>
+          From the dataset, we can see that the "domain" column contains various sources from which Reddit posts originate. The pie chart provides a visual representation of the distribution of these sources. The largest portion, labeled as "Others" (41.8%), suggests that a significant number of sources are diverse and not individually large enough to be listed separately. However, notable domains appearing in the analysis include i.redd.it (16.8%), which is Reddit’s image hosting service, and self.Liberal, self.Anarchism, self.socialism, and self.Conservative, which indicate subreddit-based discussions where posts were created directly on Reddit rather than linking to an external website. Other sources such as youtube.com (7.08%), nytimes.com, apnews.com, and thehill.com suggest that users often share news and opinion pieces from prominent media outlets. Additionally, v.redd.it (Reddit’s video hosting) and youtu.be (YouTube’s short-link service) indicate a mix of multimedia content being shared within the discussions.
+        </p>
         <div className='plot-container'>
           <PlotComponent data={pieData} layout={layout} />
         </div>
+        <p className='plot-caption'>
+          Figure 1: Distribution of Domains in Political Subreddits
+        </p>
+        <h2>Data Used</h2>
+        <p className='paragraph'>
+          The dataset used for this analysis has been carefully refined by removing non-informative columns, redundant fields, and metadata that did not contribute meaningful insights. This step was essential to streamline data processing and enhance clarity, making it easier to extract useful patterns. Additionally, media-related fields were excluded since the focus of this analysis is primarily text-based interactions, although such fields might be useful for other research objectives, such as studying multimedia engagement. The selection of key fields reflects an emphasis on user interactions, post engagement, and source credibility, ensuring a well-rounded understanding of how information circulates within Reddit discussions.
+        </p>
         <div className='plot-container'>
           <PlotComponent data={subredditPieData} layout={layout} />
         </div>
+        <p className='plot-caption'>
+          Figure 2: Distribution of Posts Across Various Political Subreddits
+        </p>
+        <h4>Features used in the Analysis</h4>
+        <p className='paragraph'>
+          The retained fields serve specific purposes in the analysis. "author" provides insight into user contributions, allowing the identification of key influencers or frequent posters. "created_utc" records timestamps, which can be used to analyze activity trends over time. "domain" is critical as it shows the sources of external content being shared, revealing patterns in media reliance. "id" uniquely identifies each post, ensuring data integrity. "num_comments" reflects engagement levels and indicates which topics generate discussions. "permalink" allows direct reference to posts for verification and deeper analysis. "score", "ups", and "upvote_ratio" together provide a measure of content popularity and reception within the community. "selftext" contains the main body of user-generated content, which is valuable for textual analysis. "subreddit" helps categorize discussions by theme or ideology, giving context to trends. Finally, "title" offers a concise summary of posts, often highlighting key discussion points. By keeping these fields, the dataset remains informative, relevant, and efficient, ensuring that the insights drawn are meaningful and actionable.
+        </p>
+        <h2>Frequency of Posts</h2>
+        <p className='paragraph'>
+          The interactive frequency plots provide a valuable insight into the posting trends of different subreddits over time, allowing users to analyze patterns and spikes in engagement. The ability to select a specific subreddit and visualize its activity over months helps in understanding how online discussions evolve in response to real-world events. From the given graphs, we can observe that both the Anarchism and Liberal subreddits exhibit noticeable fluctuations, with certain periods experiencing sharp spikes in activity. The Liberal subreddit shows a steady increase in activity starting from November 2024, with major peaks around late November and February 2025, suggesting that significant political or social events around these times may have triggered heightened discussions. The Anarchism subreddit, on the other hand, has a more volatile but increasing trend, with major spikes occurring around late January 2025, which could indicate responses to political policies, protests, or ideological debates that gained traction online.
+        </p>
         <div className="dropdown-container">
           <label htmlFor="subreddit-select">Select Subreddit: </label>
           <select
@@ -285,10 +301,30 @@ function App() {
             layout={timeSeriesLayout}
           />
         </div>
+        <p className='plot-caption'>
+          Figure 3: Post Frequency Trend in various Subreddits
+        </p>
+        <p className='paragraph'>
+          When comparing the two graphs, the Liberal subreddit appears to have a lower activity level in the earlier months (September–October 2024), but it experiences a dramatic rise in posts towards the end of the year, particularly aligning with election seasons or political debates that typically intensify in November. This could suggest that discussions on liberal policies, political figures, or election outcomes led to a surge in user engagement. The Anarchism subreddit, while also experiencing growth, seems to have a more steady but less predictable pattern, with multiple peaks rather than a singular sharp rise. The large spike in late January 2025 may correlate with protests, policy changes, or political events that align with anarchist ideologies. The visualization of these trends provides a powerful tool for researchers, political analysts, or even general users interested in how online political discourse shifts in response to societal events, allowing them to track discussions and sentiment over time.
+        </p>
 
+        <h2>Sentiment of Posts</h2>
         <div className="plot-container">
           <PlotComponent data={[scatterTrace, trendTrace]} layout={layoutSentiment} />
         </div>
+
+        <p className='plot-caption'>
+          Figure 4: Sentiment Analysis of Posts in the Anarchism Subreddit with a 7-Day Moving Average
+        </p>
+
+        <p className='paragraph'>
+          This plot represents the sentiment trends in the Anarchism subreddit over time. Each post's sentiment is plotted, where -1 indicates negative sentiment (red dots) and +1 represents positive sentiment (green dots). The blue line shows the 7-day moving average sentiment, providing a clearer trend of fluctuations. The sentiment appears to remain mostly negative, with occasional spikes toward neutrality or slight positivity, particularly around January 2025, suggesting an event that temporarily shifted discussions. Despite these fluctuations, the general trend seems to lean toward the negative, highlighting critical discourse within the subreddit.
+        </p>
+        <h2>LDA Analysis</h2>
+        <p className='paragraph'>
+          The plot visualizes the results of Latent Dirichlet Allocation (LDA), a popular topic modeling technique used to identify latent topics within a collection of text documents, in this case, Reddit posts from the Anarchism and Liberal subreddits. LDA assumes that each document is a mixture of topics and each topic is a mixture of words, allowing it to uncover hidden thematic structures without prior labeling. The graph displays the temporal distribution of these topics over a period of time, with five distinct topics represented by different colored lines, each tracking the frequency or prominence of the associated topic across the months. A legend on the right identifies each topic by color, while a section below the plot lists the keywords associated with each topic, providing a quick reference to their content. The x-axis represents the timeline, and the y-axis indicates the number of posts or topic prevalence, offering a clear view of how topic popularity shifts over time, with notable peaks and trends that highlight the dynamic nature of discussions within these subreddits.
+        </p>
+
 
         <div className="dropdown-container">
           <label htmlFor="dataset-select">Select Dataset: </label>
@@ -307,27 +343,25 @@ function App() {
 
 
         <div className="plot-container">
-          {/* Plot Component */}
           <PlotComponent data={currentData.data} layout={currentData.layout} />
-
-          {/* Topic Keywords */}
         </div>
-        <div>
-          <h3>Topic Keywords</h3>
+
+        <p className='plot-caption'>
+          Figure 5: Topic Distribution in the Anarchism and Liberal Subreddits Using LDA
+        </p>
+
+        <div >
+          <h4 className='topic-keywords'>Topic Keywords</h4>
           {Object.entries(currentData.topics).map(([topic, words]) => (
-            <p key={topic}>
+            <p key={topic} className='topic-keywords-list'>
               <strong>{topic}:</strong> {words.join(", ")}
             </p>
           ))}
         </div>
 
-
-        <div>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam sint id dolorum?
-        </div>
+        <h2>Talk with the Dataset</h2>
 
         <div className="chatbot-container">
-          <h1>Reddit Dataset Chatbot</h1>
           <p>Ask a question about the Reddit dataset.</p>
 
           <form onSubmit={handleSubmit}>
@@ -335,7 +369,7 @@ function App() {
               type="text"
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              placeholder="Enter your question"
+              placeholder="What are posts on Liberalism tell?"
               disabled={loading}
               className="question-input"
             />
@@ -347,6 +381,10 @@ function App() {
           {error && <div className="error"><p>{error}</p></div>}
           {answer && !error && <div className="answer"><h3>Answer:</h3><p>{answer}</p></div>}
         </div>
+
+
+
+
       </div>
     </div>
   );
