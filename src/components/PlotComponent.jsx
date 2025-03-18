@@ -9,7 +9,7 @@ const PlotComponent = ({ data, layout }) => {
                 layout={{ ...layout, autosize: true }}
                 useResizeHandler={true}
                 style={{ width: "100%", height: "100%" }}
-                config={{ responsive: true }} // Ensure the plot is responsive
+                config={{ responsive: true }}
             />
         </div>
     );

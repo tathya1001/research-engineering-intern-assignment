@@ -20,9 +20,9 @@
   justify-content: center;
   width: 40%;
   max-width: 1200px;
-  /* Limit max width for large screens */
+
   padding: 0 15px;
-  /* Add padding for smaller screens */
+
 }
 
 h1 {
@@ -80,10 +80,10 @@ h4 {
   margin-bottom: 20px;
   margin-top: 1.75rem;
   max-width: 100%;
-  /* Ensure it doesn’t exceed parent */
+
 }
 
-/* Dropdown Styling */
+
 .dropdown-container {
   margin: 20px 0;
   text-align: center;
@@ -93,7 +93,7 @@ h4 {
   display: flex;
   flex-direction: row;
   max-width: 400px;
-  /* Limit width for better readability */
+
 }
 
 .dropdown-container label {
@@ -151,7 +151,7 @@ h4 {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 600px;
-  /* Limit max width */
+
 }
 
 .chatbot-container p {
@@ -237,7 +237,7 @@ h4 {
   line-height: 1.5;
 }
 
-/* Media Queries for Responsiveness */
+
 @media (max-width: 1024px) {
   .parent-container {
     width: 70%;
